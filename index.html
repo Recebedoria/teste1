@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistema de Diferenças - Demo</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <!-- Login Screen -->
+  <div id="login-screen" class="screen">
+    <div class="card">
+      <h1>Login</h1>
+      <label>Matrícula</label>
+      <input id="login-matricula" type="text" placeholder="Digite sua matrícula"/>
+      <label>Senha</label>
+      <div class="password-field">
+        <input id="login-senha" type="password" placeholder="Digite sua senha"/>
+        <button id="toggle-login-eye" class="icon-btn" aria-label="Mostrar/ocultar senha">👁️</button>
+      </div>
+      <div class="actions">
+        <button id="btn-login" class="primary">Entrar</button>
+        <button id="btn-open-register" class="secondary">Novo usuário</button>
+      </div>
+      <p class="muted">Demonstração local (sem servidor). Dados ficam no seu navegador.</p>
+    </div>
+  </div>
+
+  <!-- Register Screen -->
+  <div id="register-screen" class="screen hidden">
+    <div class="card">
+      <h1>Novo Usuário</h1>
+      <div class="grid">
+        <div>
+          <label>Nome</label>
+          <input id="reg-nome" type="text" placeholder="Nome completo"/>
+        </div>
+        <div>
+          <label>Matrícula</label>
+          <input id="reg-matricula" type="text" placeholder="Ex.: 0001"/>
+        </div>
+      </div>
+      <label>Tipo de usuário</label>
+      <select id="reg-tipo">
+        <option>Usuário comum</option>
+        <option>Gerente</option>
+        <option>Diretor</option>
+      </select>
+      <label>Senha</label>
+      <div class="password-field">
+        <input id="reg-senha" type="password" placeholder="Senha"/>
+        <button id="toggle-reg-eye" class="icon-btn" aria-label="Mostrar/ocultar senha">👁️</button>
+      </div>
+      <label>Confirmar senha</label>
+      <input id="reg-confirma" type="password" placeholder="Repita a senha"/>
+      <p class="muted">A senha deve conter pelo menos 1 letra maiúscula, 1 número e 1 caractere especial.</p>
+      <div class="actions">
+        <button id="btn-registrar" class="primary">Confirmar cadastro</button>
+        <button id="btn-cancelar-cadastro" class="secondary">Cancelar</button>
+      </div>
+      <div id="reg-alert" class="alert hidden"></div>
+    </div>
+  </div>
+
+  <!-- App Screen -->
+  <div id="app" class="hidden">
+    <header class="topbar">
+      <nav class="menuleft">
+        <button class="link" data-view="home">Início</button>
+        <button class="link" data-view="novo-relatorio">Novo relatório</button>
+        <button class="link" data-view="consulta">Consulta</button>
+        <button class="link" data-view="permissoes">Permissões</button>
+      </nav>
+      <div class="userbox">
+        <div class="userinfo">
+          <div><strong id="ui-nome"></strong></div>
+          <div>Matrícula: <span id="ui-mat"></span></div>
+          <div>Tipo: <span id="ui-tipo"></span></div>
+        </div>
+        <label class="avatar">
+          <input id="upload-foto" type="file" accept="image/*" hidden/>
+          <img id="foto" alt="foto do usuário"/>
+          <button id="btn-foto" class="secondary small">Alterar foto</button>
+        </label>
+        <button id="btn-sair" class="danger">Sair</button>
+      </div>
+    </header>
+
+    <main id="main" class="content">
+      <!-- Views -->
+      <section id="view-home" class="view">
+        <div class="watermark"></div>
+        <div class="panel">
+          <h2>Bem-vindo</h2>
+          <p>Use o menu à esquerda para navegar.</p>
+        </div>
+      </section>
+
+      <section id="view-novo-relatorio" class="view hidden">
+        <div class="panel">
+          <h2>Novo relatório</h2>
+          <form id="form-diff" class="grid">
+            <div>
+              <label>Data</label>
+              <input type="date" id="dif-data" required/>
+            </div>
+            <div>
+              <label>Descrição</label>
+              <input type="text" id="dif-desc" placeholder="Ex.: Adiantamento" required/>
+            </div>
+            <div>
+              <label>Valor (use negativo para desconto)</label>
+              <input type="number" step="0.01" id="dif-valor" required/>
+            </div>
+            <div class="col-span-2">
+              <button class="primary" type="submit">Lançar</button>
+            </div>
+          </form>
+
+          <h3>Meus lançamentos</h3>
+          <table id="tbl-meus">
+            <thead><tr><th>Data</th><th>Descrição</th><th>Valor</th><th></th></tr></thead>
+            <tbody></tbody>
+            <tfoot>
+              <tr><td colspan="2">Subtotal (valores &lt; -5,00)</td><td id="subtotal"></td><td></td></tr>
+              <tr><td colspan="2">Valor a restituir no mês</td><td id="restituir"></td><td></td></tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <section id="view-consulta" class="view hidden">
+        <div class="panel">
+          <h2>Consulta</h2>
+          <div id="consulta-info" class="muted"></div>
+          <table id="tbl-consulta">
+            <thead><tr><th>Matrícula</th><th>Nome</th><th>Tipo</th><th>Lançamentos</th><th>Subtotal &lt; -5</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="view-permissoes" class="view hidden">
+        <div class="panel">
+          <h2>Permissões</h2>
+          <p class="muted">Somente Administrador e Gerente com permissão podem editar.</p>
+          <div id="perm-wrap"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
