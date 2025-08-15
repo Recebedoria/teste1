@@ -239,7 +239,7 @@ function renderPerms(){
     const perms = getPerm(u.matricula);
     row.innerHTML = \`
       <div class="grid">
-        <div><strong>\${u.nome}</strong><br/><span class="muted">Mat.: \${u.matricula} — \${u.tipo} \${u.admin?'(Adm)':''}</span></div>
+        <div><strong>\${u.nome}</strong><br/><span class="muted">Mat.: \${u.matricula} - \${u.tipo} \${u.admin?'(Adm)':''}</span></div>
         <div>
           <label><input type="checkbox" data-key="managePerms" \${perms.managePerms?'checked':''}/> Gerenciar permissões</label>
         </div>
