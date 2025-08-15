@@ -1,27 +1,24 @@
-# Sistema de Diferenças — DEMO (estático)
-Este pacote entrega um protótipo **estático** (HTML/CSS/JS) que simula o sistema descrito. Não há backend: os dados ficam no `localStorage` do navegador.
+# Sistema de Diferenças — DEMO (GitHub Pages)
 
-## Como usar
-1. Extraia o ZIP.
-2. Abra `index.html` no navegador.
-3. Faça login com o **Administrador** padrão:
-   - Matrícula: `0001`
-   - Senha: `Admin@123!`
-4. Cadastre novos usuários pelo botão **Novo usuário** na tela de login.
+Este é um protótipo **estático** (HTML/CSS/JS) que simula o sistema descrito no documento original.  
+Funciona 100% no navegador, usando apenas `localStorage` para armazenar dados.
 
-## Regras implementadas
-- **Cadastro**: nome, matrícula (única), tipo (Usuário comum, Gerente, Diretor), senha + confirmação.
-- **Validação de senha**: exige 1 maiúscula, 1 número, 1 caractere especial.
-- **Olho** para visualizar senha no login e no cadastro.
-- **Pós-cadastro**: retorna à tela de login.
-- **Perfis**:
-  - Usuário comum: lança e vê seus próprios lançamentos; subtotal de valores `< -5,00` e valor a restituir (módulo do subtotal).
-  - Gerente: pode receber permissões específicas (ex.: gerenciar permissões).
-  - Diretor: consulta de todos os usuários.
-  - **ALPHA RED** (matrícula `0001`) é administrador e pode designar/retirar administrador.
-- **Tela principal**: menu (Início, novo relatório, consulta, permissões) e caixa do usuário (nome, matrícula, tipo, foto, sair).
-- **Marca d’água**: imagem remota definida em `styles.css`. (Se a URL expirar, altere a propriedade `background` da classe `.watermark`.)
+## Como publicar no GitHub Pages
+
+1. Crie um repositório no seu GitHub (pode ser público ou privado).  
+2. Faça upload de **todos os arquivos deste pacote** na raiz do repositório (`index.html`, `styles.css`, `app.js`, `README.md`).  
+3. No GitHub, vá em **Settings → Pages**.  
+4. Em *Source*, escolha a branch `main` (ou `master`) e a pasta `/ (root)`.  
+5. Clique em **Save**.  
+6. Aguarde alguns minutos e acesse o link fornecido pelo GitHub Pages.
+
+## Login padrão
+
+- Matrícula: `0001`  
+- Senha: `Admin@123!`  
 
 ## Observações
-- Por ser demo local, **não use dados reais**.
-- Para persistência real, adicione uma API e troque o `localStorage` por um banco de dados.
+
+- Não há servidor — tudo roda no navegador do usuário.  
+- Não use dados reais neste protótipo.  
+- Para ter persistência real e multiusuário, será necessário criar um backend.
